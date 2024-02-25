@@ -28,7 +28,7 @@ namespace MyRecipesApi.Services
                     "Add the tomato sauce to the meat",
                     "Serve the meat sauce on top of the spaghetti"
                 ],
-                version = 1
+                Version = 1
             };
         }
     }

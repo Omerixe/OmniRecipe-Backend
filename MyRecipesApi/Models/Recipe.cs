@@ -8,6 +8,6 @@ namespace MyRecipesApi.Models
         public ICollection<Ingredient> Ingredients { get; set; }
 
         public ICollection<string> Steps { get; set; }
-        public int version { get; set; }
+        public int Version { get; set; }
     }
 }
