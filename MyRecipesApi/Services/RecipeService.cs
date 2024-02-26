@@ -14,11 +14,11 @@ namespace MyRecipesApi.Services
                 Subtitle = "A classic Italian dish",
                 Ingredients = 
                 [
-                    new Ingredient { Name = "Spaghetti", Quantity = "200", Unit = Unit.Gram },
-                    new Ingredient { Name = "Minced meat", Quantity = "400", Unit = Unit.Gram },
-                    new Ingredient { Name = "Onion", Quantity = "1", Unit = Unit.Piece },
-                    new Ingredient { Name = "Garlic", Quantity = "2", Unit = Unit.Piece },
-                    new Ingredient { Name = "Tomato sauce", Quantity = "500", Unit = Unit.Milliliter }
+                    new Ingredient { Name = "Spaghetti", Quantity = "200", Unit = "g" },
+                    new Ingredient { Name = "Minced meat", Quantity = "400", Unit = "g" },
+                    new Ingredient { Name = "Onion", Quantity = "1", Unit = "pc." },
+                    new Ingredient { Name = "Garlic", Quantity = "2", Unit = "pc." },
+                    new Ingredient { Name = "Tomato sauce", Quantity = "500", Unit = "ml" }
                 ],
                 Steps =
                 [
