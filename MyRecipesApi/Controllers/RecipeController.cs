@@ -15,6 +15,10 @@ namespace MyRecipesApi.Controllers
             _recipeService = recipeService;
         }
 
+        [HttpGet]
+        public async Task<List<Recipe>> GetRecipes() =>
+            await _recipeService.GetRecipesAsync();
+
         // GET: api/Recipe/5
         [HttpGet("{id}")]
         public ActionResult<Recipe> GetRecipe(int id)
