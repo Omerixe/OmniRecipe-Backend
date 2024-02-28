@@ -18,19 +18,5 @@ namespace MyRecipesApi.Controllers
         [HttpGet]
         public async Task<List<Recipe>> GetRecipes() =>
             await _recipeService.GetRecipesAsync();
-
-        // GET: api/Recipe/5
-        [HttpGet("{id}")]
-        public ActionResult<Recipe> GetRecipe(int id)
-        {
-            var recipe = _recipeService.GetRecipe();
-
-            if (recipe == null)
-            {
-                return NotFound();
-            }
-
-            return recipe;
-        }
     }
 }
