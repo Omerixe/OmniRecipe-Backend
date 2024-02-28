@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using MyRecipesApi.Dto;
 using MyRecipesApi.Models;
 using MyRecipesApi.Services;
 
@@ -16,7 +17,7 @@ namespace MyRecipesApi.Controllers
         }
 
         [HttpGet]
-        public async Task<List<Recipe>> GetRecipes() =>
+        public async Task<List<RecipeSummaryDto>> GetRecipes() =>
             await _recipeService.GetRecipesAsync();
     }
 }

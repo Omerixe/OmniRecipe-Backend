@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using MyRecipesApi.Dto;
 using MyRecipesApi.Models;
 
 namespace MyRecipesApi.Services
@@ -17,7 +18,15 @@ namespace MyRecipesApi.Services
             _recipesCollection = database.GetCollection<Recipe>(settings.Value.RecipesCollectionName);
         }
 
-        public async Task<List<Recipe>> GetRecipesAsync() =>
-            await _recipesCollection.Find(_ => true).ToListAsync();
+        public async Task<List<RecipeSummaryDto>> GetRecipesAsync()
+        {
+            var recipes = await _recipesCollection.Find(recipe => true).ToListAsync();
+            return recipes.Select(recipe => new RecipeSummaryDto
+            {
+                Id = recipe.Id,
+                Title = recipe.Title,
+                Subtitle = recipe.Subtitle,
+            }).ToList();
+        }
     }
 }
