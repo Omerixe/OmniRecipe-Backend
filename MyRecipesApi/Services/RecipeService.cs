@@ -28,5 +28,8 @@ namespace MyRecipesApi.Services
                 Subtitle = recipe.Subtitle,
             }).ToList();
         }
+
+        public Recipe GetRecipe(string id) =>
+            _recipesCollection.Find<Recipe>(recipe => recipe.Id == id).FirstOrDefault();
     }
 }

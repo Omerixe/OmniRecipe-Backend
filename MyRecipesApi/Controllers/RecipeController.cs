@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using MyRecipesApi.Dto;
 using MyRecipesApi.Models;
 using MyRecipesApi.Services;
+using System;
 
 namespace MyRecipesApi.Controllers
 {
@@ -16,8 +17,32 @@ namespace MyRecipesApi.Controllers
             _recipeService = recipeService;
         }
 
-        [HttpGet]
-        public async Task<List<RecipeSummaryDto>> GetRecipes() =>
-            await _recipeService.GetRecipesAsync();
+        [HttpGet("{id}")]
+        public ActionResult<RecipeDto> Get(string id)
+        {
+            var recipe = _recipeService.GetRecipe(id);
+
+            if (recipe == null)
+            {
+                return NotFound();
+            }
+
+            var recipeDto = new RecipeDto
+            {
+                Id = recipe.Id,
+                Title = recipe.Title,
+                Subtitle = recipe.Subtitle,
+                Ingredients = recipe.Ingredients.Select(ingredient => new IngredientDto
+                {
+                    Name = ingredient.Name,
+                    Quantity = ingredient.Quantity,
+                    Unit = ingredient.Unit
+                }).ToList(),
+                Steps = recipe.Steps,
+                Version = recipe.Version
+            };
+
+            return recipeDto;
+        }
     }
 }
