@@ -17,7 +17,18 @@ namespace MyRecipesApi.Controllers
         }
 
         [HttpGet]
-        public async Task<List<RecipeSummaryDto>> GetRecipes() =>
-            await _recipeService.GetRecipesAsync();
+        public async Task<List<RecipeSummaryDto>> GetRecipes()
+        {
+            var recipes = await _recipeService.GetRecipesAsync();
+
+            var recipeDtos = recipes.Select(recipe => new RecipeSummaryDto
+            {
+                Id = recipe.Id,
+                Title = recipe.Title,
+                Subtitle = recipe.Subtitle
+            }).ToList();
+
+            return recipeDtos;
+        }
     }
 }

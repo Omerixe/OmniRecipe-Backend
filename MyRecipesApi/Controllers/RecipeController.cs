@@ -18,7 +18,7 @@ namespace MyRecipesApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<RecipeDto> Get(string id)
+        public ActionResult<RecipeDto> GetRecipe(string id)
         {
             var recipe = _recipeService.GetRecipe(id);
 
@@ -39,10 +39,35 @@ namespace MyRecipesApi.Controllers
                     Unit = ingredient.Unit
                 }).ToList(),
                 Steps = recipe.Steps,
-                Version = recipe.Version
+                Version = recipe.Version,
+                ImageData = recipe.ImageData
             };
 
             return recipeDto;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<RecipeDto>>> GetCategories()
+        {
+            var recipes = await _recipeService.GetRecipesAsync();
+
+            var recipeDtos = recipes.Select(recipe => new RecipeDto
+            {
+                Id = recipe.Id,
+                Title = recipe.Title,
+                Subtitle = recipe.Subtitle,
+                Ingredients = recipe.Ingredients.Select(ingredient => new IngredientDto
+                {
+                    Name = ingredient.Name,
+                    Quantity = ingredient.Quantity,
+                    Unit = ingredient.Unit
+                }).ToList(),
+                Steps = recipe.Steps,
+                Version = recipe.Version,
+                ImageData = recipe.ImageData
+            }).ToList();
+
+            return recipeDtos;
         }
     }
 }

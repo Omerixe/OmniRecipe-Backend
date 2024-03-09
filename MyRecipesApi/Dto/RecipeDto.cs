@@ -12,5 +12,7 @@ namespace MyRecipesApi.Dto
 
         public ICollection<string> Steps { get; set; }
         public int Version { get; set; }
+
+        public string ImageData { get; set; }
     }
 }
