@@ -9,6 +9,7 @@ namespace MyRecipesApi.Services
     public class RecipeService
     {
         private readonly IMongoCollection<Recipe> _recipesCollection;
+        public readonly int CurrentVersion = 1;
 
         public RecipeService(IOptions<RecipesDatabaseSettings> settings)
         {
@@ -24,5 +25,10 @@ namespace MyRecipesApi.Services
 
         public Recipe GetRecipe(string id) =>
             _recipesCollection.Find<Recipe>(recipe => recipe.Id == id).FirstOrDefault();
+
+
+        public async Task CreateRecipe(Recipe recipe) =>
+            await _recipesCollection.InsertOneAsync(recipe);
+            
     }
 }

@@ -69,5 +69,28 @@ namespace MyRecipesApi.Controllers
 
             return recipeDtos;
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(NewRecipeDto recipeDto)
+        {
+            var recipe = new Recipe
+            {
+                Title = recipeDto.Title,
+                Subtitle = recipeDto.Subtitle,
+                Ingredients = recipeDto.Ingredients.Select(ingredientDto => new Ingredient
+                {
+                    Name = ingredientDto.Name,
+                    Quantity = ingredientDto.Quantity,
+                    Unit = ingredientDto.Unit
+                }).ToList(),
+                Steps = recipeDto.Steps,
+                Version = _recipeService.CurrentVersion,
+                ImageUrl = recipeDto.ImageUrl
+            };
+
+            await _recipeService.CreateRecipe(recipe);
+
+            return CreatedAtAction(nameof(GetRecipe), new { id = recipe.Id }, recipe);
+        }
     }
 }
