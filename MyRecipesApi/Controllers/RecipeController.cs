@@ -40,7 +40,7 @@ namespace MyRecipesApi.Controllers
                 }).ToList(),
                 Steps = recipe.Steps,
                 Version = recipe.Version,
-                ImageData = recipe.ImageData
+                ImageUrl = recipe.ImageUrl
             };
 
             return recipeDto;
@@ -64,7 +64,7 @@ namespace MyRecipesApi.Controllers
                 }).ToList(),
                 Steps = recipe.Steps,
                 Version = recipe.Version,
-                ImageData = recipe.ImageData
+                ImageUrl = recipe.ImageUrl
             }).ToList();
 
             return recipeDtos;
