@@ -11,6 +11,6 @@ namespace MyRecipesApi.Dto
 
         public ICollection<string> Steps { get; set; }
 
-        public string ImageUrl { get; set; }
+        public IFormFile? Image { get; set; }
     }
 }

@@ -85,10 +85,10 @@ namespace MyRecipesApi.Controllers
                 }).ToList(),
                 Steps = recipeDto.Steps,
                 Version = _recipeService.CurrentVersion,
-                ImageUrl = recipeDto.ImageUrl
+                ImageUrl = ""
             };
 
-            await _recipeService.CreateRecipe(recipe);
+            await _recipeService.CreateRecipe(recipe, recipeDto.Image);
 
             return CreatedAtAction(nameof(GetRecipe), new { id = recipe.Id }, recipe);
         }

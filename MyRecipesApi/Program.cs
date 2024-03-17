@@ -8,8 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddSingleton<RecipeService>();
+builder.Services.AddSingleton<FirebaseService>();
 
 builder.Services.Configure<RecipesDatabaseSettings>(builder.Configuration.GetSection("RecipesDatabase"));
+builder.Services.Configure<FirebaseSettings>(builder.Configuration.GetSection("Firebase"));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
