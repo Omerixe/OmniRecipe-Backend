@@ -21,6 +21,13 @@ namespace MyRecipesApi.Services
             _recipesCollection = database.GetCollection<Recipe>(settings.Value.RecipesCollectionName);
         }
 
+        public async Task<List<Recipe>> GetRecipesAsync() =>
+            await _recipesCollection.Find(recipe => true).ToListAsync();
+
+
+        public Recipe GetRecipe(string id) =>
+            _recipesCollection.Find<Recipe>(recipe => recipe.Id == id).FirstOrDefault();
+
         public async Task CreateRecipe(Recipe recipe, IFormFile? imageFile = null)
         {
             if (imageFile != null)
