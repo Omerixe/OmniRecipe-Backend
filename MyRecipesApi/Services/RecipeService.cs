@@ -15,7 +15,9 @@ namespace MyRecipesApi.Services
         public RecipeService(IOptions<RecipesDatabaseSettings> settings, FirebaseService firebaseService)
         {
             _firebaseService = firebaseService;
-            var client = new MongoClient(settings.Value.ConnectionString);
+            var mongoClientSettings = MongoClientSettings.FromUrl(new MongoUrl(settings.Value.ConnectionString));
+            mongoClientSettings.SslSettings = new SslSettings { EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12 };
+            var client = new MongoClient(mongoClientSettings);
             var database = client.GetDatabase(settings.Value.DatabaseName);
 
             _recipesCollection = database.GetCollection<Recipe>(settings.Value.RecipesCollectionName);
