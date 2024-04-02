@@ -9,12 +9,12 @@ namespace MyRecipesApi.Services
     public class RecipeService
     {
         private readonly IMongoCollection<Recipe> _recipesCollection;
-        private FirebaseService _firebaseService;
+        private AzureService _azureService;
         public readonly int CurrentVersion = 1;
 
-        public RecipeService(IOptions<RecipesDatabaseSettings> settings, FirebaseService firebaseService)
+        public RecipeService(IOptions<RecipesDatabaseSettings> settings, AzureService azureService)
         {
-            _firebaseService = firebaseService;
+            _azureService = azureService;
             var mongoClientSettings = MongoClientSettings.FromUrl(new MongoUrl(settings.Value.ConnectionString));
             mongoClientSettings.SslSettings = new SslSettings { EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12 };
             var client = new MongoClient(mongoClientSettings);
@@ -34,7 +34,7 @@ namespace MyRecipesApi.Services
         {
             if (imageFile != null)
             {
-                var url = await _firebaseService.UploadImage(imageFile);
+                var url = await _azureService.UploadImage(imageFile);
                 if (url != null)
                 {
                     recipe.ImageUrl = url;

@@ -8,9 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FirebaseAuthentication.net" Version="4.1.0" />
-    <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
-    <PackageReference Include="Google.Cloud.Storage.V1" Version="4.9.0" />
+    <PackageReference Include="Azure.Identity" Version="1.10.4" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.2" />
     <PackageReference Include="MongoDB.Driver" Version="2.24.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
