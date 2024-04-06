@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace MyRecipesApi.Services;
+namespace OmniRecipesApi.Services;
 public class ApiKeyMiddleware
 {
     private readonly RequestDelegate _next;

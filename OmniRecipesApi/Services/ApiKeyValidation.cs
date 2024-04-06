@@ -1,4 +1,4 @@
-namespace MyRecipesApi.Services;
+namespace OmniRecipesApi.Services;
 
 public class ApiKeyValidation
 {

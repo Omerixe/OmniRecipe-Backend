@@ -1,6 +1,6 @@
 using Microsoft.OpenApi.Models;
-using MyRecipesApi.Models;
-using MyRecipesApi.Services;
+using OmniRecipesApi.Models;
+using OmniRecipesApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

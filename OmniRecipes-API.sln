@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyRecipesApi", "MyRecipesApi\MyRecipesApi.csproj", "{3B996B1F-179B-4EAC-BC7B-8775BD6DAC69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmniRecipesApi", "OmniRecipesApi\OmniRecipesApi.csproj", "{3B996B1F-179B-4EAC-BC7B-8775BD6DAC69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

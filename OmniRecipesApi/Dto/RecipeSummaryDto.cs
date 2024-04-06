@@ -1,4 +1,4 @@
-namespace MyRecipesApi.Dto
+namespace OmniRecipesApi.Dto
 {
     public class RecipeSummaryDto
     {

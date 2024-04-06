@@ -2,7 +2,7 @@ using Azure.Identity;
 using Azure.Storage.Blobs;
 using Microsoft.Extensions.Options;
 
-namespace MyRecipesApi.Services
+namespace OmniRecipesApi.Services
 {
     public class AzureService
     {

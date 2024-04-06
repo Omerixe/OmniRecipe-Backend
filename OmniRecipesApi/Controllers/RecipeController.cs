@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
-using MyRecipesApi.Dto;
-using MyRecipesApi.Models;
-using MyRecipesApi.Services;
+using OmniRecipesApi.Dto;
+using OmniRecipesApi.Models;
+using OmniRecipesApi.Services;
 using System;
 
-namespace MyRecipesApi.Controllers
+namespace OmniRecipesApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

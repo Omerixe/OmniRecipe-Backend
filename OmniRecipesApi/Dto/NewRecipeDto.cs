@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MyRecipesApi.Dto
+namespace OmniRecipesApi.Dto
 {
     public class NewRecipeDto
     {

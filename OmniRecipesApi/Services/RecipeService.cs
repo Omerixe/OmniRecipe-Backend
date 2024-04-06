@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using MyRecipesApi.Dto;
-using MyRecipesApi.Models;
+using OmniRecipesApi.Dto;
+using OmniRecipesApi.Models;
 
-namespace MyRecipesApi.Services
+namespace OmniRecipesApi.Services
 {
     public class RecipeService
     {

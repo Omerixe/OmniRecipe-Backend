@@ -1,7 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace MyRecipesApi.Models
+namespace OmniRecipesApi.Models
 {
     public class Recipe
     {
