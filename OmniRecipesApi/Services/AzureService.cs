@@ -1,5 +1,6 @@
 using Azure.Identity;
 using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Options;
 
 namespace OmniRecipesApi.Services
@@ -24,6 +25,7 @@ namespace OmniRecipesApi.Services
             var containerClient = _blobServiceClient.GetBlobContainerClient("images");
             var blobClient = containerClient.GetBlobClient(Guid.NewGuid().ToString() + Path.GetExtension(formFile.FileName));
             await blobClient.UploadAsync(formFile.OpenReadStream(), true);
+            blobClient.SetHttpHeaders(new BlobHttpHeaders() { ContentType = formFile.ContentType });
 
             return blobClient.Uri.ToString();
         }
