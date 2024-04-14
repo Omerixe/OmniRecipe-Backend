@@ -25,7 +25,8 @@ namespace OmniRecipesApi.Controllers
             {
                 Id = recipe.Id,
                 Title = recipe.Title,
-                Subtitle = recipe.Subtitle
+                Subtitle = recipe.Subtitle,
+                ImageUrl = recipe.ImageUrl
             }).ToList();
 
             return recipeDtos;
