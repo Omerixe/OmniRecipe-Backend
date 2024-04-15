@@ -1,6 +1,6 @@
 # OmniRecipes API
 
-**IPORTANT**: This project is currently in development and not yet ready for use.
+**IMPORTANT**: This project is currently in development and not yet ready for use.
 
 This is an API for OmniRecipes, a platform that provides a wide variety of recipes. 
 Currently it allows to retrieve all recipes and add new recipes.
