@@ -9,12 +9,12 @@ namespace OmniRecipesApi.Services
     public class RecipeService
     {
         private readonly IMongoCollection<Recipe> _recipesCollection;
-        private AzureService _azureService;
+        private IImageService _imageService;
         public readonly int CurrentVersion = 1;
 
-        public RecipeService(IOptions<RecipesDatabaseSettings> settings, AzureService azureService)
+        public RecipeService(IOptions<RecipesDatabaseSettings> settings, IImageService imageService)
         {
-            _azureService = azureService;
+            _imageService = imageService;
             var mongoClientSettings = MongoClientSettings.FromUrl(new MongoUrl(settings.Value.ConnectionString));
             mongoClientSettings.SslSettings = new SslSettings { EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12 };
             var client = new MongoClient(mongoClientSettings);
@@ -34,7 +34,7 @@ namespace OmniRecipesApi.Services
         {
             if (imageFile != null)
             {
-                var url = await _azureService.UploadImage(imageFile);
+                var url = await _imageService.UploadImage(imageFile);
                 if (url != null)
                 {
                     recipe.ImageUrl = url;

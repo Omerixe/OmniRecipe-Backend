@@ -1,3 +1,4 @@
+using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using OmniRecipesApi.Models;
 using OmniRecipesApi.Services;
@@ -11,6 +12,15 @@ builder.Services.AddControllers();
 builder.Services.AddSingleton<RecipeService>();
 builder.Services.AddSingleton<AzureService>();
 builder.Services.AddTransient<ApiKeyValidation>();
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddTransient<IImageService, LocalImageService>();
+}
+else
+{
+    builder.Services.AddTransient<IImageService, AzureService>();
+}
 
 builder.Services.Configure<RecipesDatabaseSettings>(builder.Configuration.GetSection("RecipesDatabase"));
 builder.Services.Configure<AzureSettings>(builder.Configuration.GetSection("Azure"));
@@ -51,6 +61,25 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    // Enable serving static files from the wwwroot folder
+    app.UseStaticFiles();
+
+    // Determine the path for the uploaded images
+    var imageFolderPath = Path.Combine(builder.Environment.ContentRootPath, "UploadedImages");
+
+    // Check if the directory exists, and if not, create it
+    if (!Directory.Exists(imageFolderPath))
+    {
+        Directory.CreateDirectory(imageFolderPath);
+    }
+
+    // Adding a static file route for images
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(imageFolderPath),
+        RequestPath = "/Images"
+    });
 }
 
 app.UseHttpsRedirection();

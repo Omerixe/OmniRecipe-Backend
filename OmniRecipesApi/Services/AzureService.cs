@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace OmniRecipesApi.Services
 {
-    public class AzureService
+    public class AzureService: IImageService
     {
         private BlobServiceClient _blobServiceClient;
         public AzureService(IOptions<AzureSettings> azureSettings)
