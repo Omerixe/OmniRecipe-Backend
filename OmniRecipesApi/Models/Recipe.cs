@@ -15,6 +15,12 @@ namespace OmniRecipesApi.Models
         public ICollection<string> Steps { get; set; }
         public int Version { get; set; }
 
+        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
+        public DateTime CreationDateTime { get; set; }
+
+        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
+        public DateTime LastModifiedDateTime { get; set; }
+
         public string ImageUrl { get; set; }
     }
 }

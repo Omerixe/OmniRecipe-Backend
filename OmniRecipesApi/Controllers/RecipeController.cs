@@ -85,6 +85,8 @@ namespace OmniRecipesApi.Controllers
                 }).ToList(),
                 Steps = recipeDto.Steps,
                 Version = _recipeService.CurrentVersion,
+                CreationDateTime = DateTime.UtcNow,
+                LastModifiedDateTime = DateTime.UtcNow,
                 ImageUrl = ""
             };
 
