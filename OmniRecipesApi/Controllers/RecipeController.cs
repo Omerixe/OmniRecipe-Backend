@@ -94,5 +94,14 @@ namespace OmniRecipesApi.Controllers
 
             return CreatedAtAction(nameof(GetRecipe), new { id = recipe.Id }, recipe);
         }
+
+        [HttpDelete("{id}")]   
+        public async Task<IActionResult> Delete(string id)
+        {
+
+            await _recipeService.DeleteRecipe(id);
+
+            return NoContent();
+        }
     }
 }

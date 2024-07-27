@@ -30,6 +30,18 @@ namespace OmniRecipesApi.Services
             return blobClient.Uri.ToString();
         }
 
+        public async Task DeleteImage(string imageUrl)
+        {
+            Uri uri = new Uri(imageUrl);
+            string filename = Path.GetFileName(uri.LocalPath);
+
+            BlobContainerClient blobContainerClient = _blobServiceClient.GetBlobContainerClient("images");
+
+            var blob = blobContainerClient.GetBlobClient(filename);
+
+            await blob.DeleteIfExistsAsync();
+        }
+
     }
 
 }

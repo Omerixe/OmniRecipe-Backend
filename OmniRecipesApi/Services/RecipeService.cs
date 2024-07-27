@@ -43,6 +43,16 @@ namespace OmniRecipesApi.Services
 
             await _recipesCollection.InsertOneAsync(recipe);
         }
+
+        public async Task DeleteRecipe(string id)
+        {
+            var recipe = GetRecipe(id);
+            if (recipe.ImageUrl != null)
+            {
+                await _imageService.DeleteImage(recipe.ImageUrl);
+            }
+            await _recipesCollection.DeleteOneAsync(recipe => recipe.Id == id);
+        }
             
             
     }

@@ -1,33 +1,45 @@
-namespace OmniRecipesApi.Services {
-    public class LocalImageService: IImageService
+namespace OmniRecipesApi.Services
 {
-    private readonly IWebHostEnvironment _environment;
-
-    public LocalImageService(IWebHostEnvironment environment)
+    public class LocalImageService : IImageService
     {
-        _environment = environment;
-    }
+        private readonly IWebHostEnvironment _environment;
 
-    public async Task<string?> UploadImage(IFormFile formFile)
-    {
-        if (formFile == null || formFile.Length == 0)
+        public LocalImageService(IWebHostEnvironment environment)
         {
-            return null;
+            _environment = environment;
         }
 
-        string uploadsFolder = Path.Combine(_environment.ContentRootPath, "UploadedImages");
-        string uniqueFileName = Guid.NewGuid().ToString() + "_" + formFile.FileName;
-        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-        using (var fileStream = new FileStream(filePath, FileMode.Create))
+        public async Task<string?> UploadImage(IFormFile formFile)
         {
-            await formFile.CopyToAsync(fileStream);
+            if (formFile == null || formFile.Length == 0)
+            {
+                return null;
+            }
+
+            string uploadsFolder = Path.Combine(_environment.ContentRootPath, "UploadedImages");
+            string uniqueFileName = Guid.NewGuid().ToString() + "_" + formFile.FileName;
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await formFile.CopyToAsync(fileStream);
+            }
+
+            // Return the URI where the file can be accessed
+            return $"/Images/{uniqueFileName}";
         }
 
-        // Return the URI where the file can be accessed
-        return $"/Images/{uniqueFileName}";
+        public Task DeleteImage(string imageUrl)
+        {
+            string filePath = Path.Combine(_environment.ContentRootPath, "UploadedImages", Path.GetFileName(imageUrl));
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+
+            return Task.CompletedTask;
+        }
     }
-}
 
 }
 
