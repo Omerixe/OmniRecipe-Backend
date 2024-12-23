@@ -28,7 +28,7 @@ namespace OmniRecipesApi.Controllers
 
             try
             {
-                var names = await _pdfToRecipeService.ConvertPdfToImagesAsync(file);
+                var names = await _pdfToRecipeService.ConvertAsync(file);
                 return Ok(new { status = "success", data = names });
             }
             catch (Exception ex)

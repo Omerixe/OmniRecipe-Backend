@@ -17,14 +17,44 @@ namespace OmniRecipesApi.Services
             Directory.CreateDirectory(_tempDirectory);
         }
 
-        /*public async Task<NewRecipeDto> ConvertAsync(IFormFile file) 
+        public async Task<List<String>> ConvertAsync(IFormFile file)
         {
-            var images = await ConvertPdfToImagesAsync(file);
-        
-        }*/
+            if (file == null || file.Length == 0)
+            {
+                throw new ArgumentException("No file uploaded.");
+            }
+
+            var imagePaths = await ConvertPdfToImagesAsync(file);
+            await ProcessImagesAndCleanUpAsync(imagePaths);
+            
+            return imagePaths;
+        }
+
+        private async Task ProcessImagesAndCleanUpAsync(List<String> imagePaths)
+        {
+            try
+            {
+                // Example: Send images to the AI model
+                foreach (var imagePath in imagePaths)
+                {
+                    await SendImageToModelAsync(imagePath);
+                }
+            }
+            finally
+            {
+                // Ensure cleanup happens regardless of success or failure
+                foreach (var imagePath in imagePaths)
+                {
+                    if (File.Exists(imagePath))
+                    {
+                        File.Delete(imagePath);
+                    }
+                }
+            }
+        }
 
 
-        public async Task<List<String>> ConvertPdfToImagesAsync(IFormFile file)
+        private async Task<List<String>> ConvertPdfToImagesAsync(IFormFile file)
         {
             using var memoryStream = new MemoryStream();
             await file.CopyToAsync(memoryStream);
@@ -37,7 +67,7 @@ namespace OmniRecipesApi.Services
 
             double maxImageCount = 25;
             int maxSize = (int)Math.Ceiling(totalPageCount / maxImageCount);
-            var pageImageGroups = new List<List<SkiaSharp.SKBitmap>> ();
+            var pageImageGroups = new List<List<SkiaSharp.SKBitmap>>();
             for (int i = 0; i < totalPageCount; i += maxSize)
             {
                 var pageImageGroup = pageImages.Skip(i).Take(maxSize).ToList();
@@ -72,6 +102,12 @@ namespace OmniRecipesApi.Services
                 Console.WriteLine($"Saved image to {pdfImageName}");
             }
             return pdfImageFiles;
+        }
+
+        private async Task SendImageToModelAsync(string imagePath)
+        {
+            // Simulate sending the image to the AI model
+            await Task.Delay(100); // Placeholder for actual logic
         }
     }
 }
