@@ -12,6 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddSingleton<RecipeService>();
 builder.Services.AddSingleton<AzureService>();
 builder.Services.AddTransient<ApiKeyValidation>();
+builder.Services.AddTransient<PdfToRecipeService>();
 
 if (builder.Environment.IsDevelopment())
 {
