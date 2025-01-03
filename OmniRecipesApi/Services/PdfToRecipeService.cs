@@ -11,11 +11,14 @@ namespace OmniRecipesApi.Services
     {
 
         private readonly string _tempDirectory;
-        public PdfToRecipeService()
+        private readonly OpenAIService _openAIService;
+        public PdfToRecipeService(OpenAIService openAIService)
         {
             _tempDirectory = Path.Combine(Path.GetTempPath(), "OmniRecipes");
             Directory.CreateDirectory(_tempDirectory);
+            _openAIService = openAIService;
         }
+
 
         public async Task<List<String>> ConvertAsync(IFormFile file)
         {
@@ -106,8 +109,7 @@ namespace OmniRecipesApi.Services
 
         private async Task SendImageToModelAsync(string imagePath)
         {
-            // Simulate sending the image to the AI model
-            await Task.Delay(100); // Placeholder for actual logic
+            await _openAIService.GetCompletionAsync(new List<string> { imagePath });
         }
     }
 }

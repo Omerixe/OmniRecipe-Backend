@@ -13,6 +13,7 @@ builder.Services.AddSingleton<RecipeService>();
 builder.Services.AddSingleton<AzureService>();
 builder.Services.AddTransient<ApiKeyValidation>();
 builder.Services.AddTransient<PdfToRecipeService>();
+builder.Services.AddTransient<OpenAIService>();
 
 if (builder.Environment.IsDevelopment())
 {
@@ -25,6 +26,7 @@ else
 
 builder.Services.Configure<RecipesDatabaseSettings>(builder.Configuration.GetSection("RecipesDatabase"));
 builder.Services.Configure<AzureSettings>(builder.Configuration.GetSection("Azure"));
+builder.Services.Configure<OpenAISettings>(builder.Configuration.GetSection("OpenAI"));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -41,5 +41,7 @@ Now, the web app should be running locally on your machine.
 
 For a release version of the app, it needs to have `Azure:StorageEndpoint` set to the endpoint of your azure storage. This can either be set as environment variable or in your configuration on Azure.
 
+[Todo] We need to figure out how the whole OpenAI stuff needs to be set up for the app to run properly
+
 ## Licence
 This project is licensed under the terms of the MIT license.
